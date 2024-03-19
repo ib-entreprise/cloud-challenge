@@ -5,6 +5,7 @@ import Register from "./pages/Register"
 import Dashboard from "./pages/Dashboard"
 import Challenges from "./pages/Challenges"
 import Profile from "./pages/Profile"
+import Challenge from "./pages/Challenge"
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />}></Route>
         <Route path="/challenges" element={<Challenges />}></Route>
         <Route path="/profile" element={<Profile />}></Route>
+        <Route path="/createChallenge" element={<Challenge />}></Route>
       </Routes>
     </>
   )
