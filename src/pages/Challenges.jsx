@@ -1,7 +1,12 @@
 import React from "react"
+import Header from "../components/Header"
 
 function Challenges() {
-  return <div>Challenges</div>
+  return (
+    <>
+      <Header />
+    </>
+  )
 }
 
 export default Challenges
