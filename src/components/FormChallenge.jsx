@@ -1,16 +1,24 @@
 import React, { useState } from "react"
+import { createChallenge } from "./firebase"
 
 function FormChallenge() {
   const [challengeData, useChallengeData] = useState({})
 
-  const createChallenge = (e) => {
+  const addChallenge = (e) => {
     const { name, value } = e.target
     useChallengeData((prev) => ({ ...prev, [name]: value }))
   }
 
   return (
     <section>
-      <form class="max-w-lg mx-auto">
+      <form
+        class="max-w-lg mx-auto"
+        method="post"
+        onSubmit={async (e) => {
+          e.preventDefault()
+          await createChallenge(challengeData)
+        }}
+      >
         <div class="mb-5">
           <label
             htmlFor="titre"
@@ -22,7 +30,7 @@ function FormChallenge() {
             type="text"
             id="titre"
             name="titre"
-            onChange={createChallenge}
+            onChange={addChallenge}
             value={challengeData.titre || ""}
             class="bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Titre du challenge"
@@ -40,7 +48,7 @@ function FormChallenge() {
             type="text"
             id="description"
             name="description"
-            onChange={createChallenge}
+            onChange={addChallenge}
             value={challengeData.description || ""}
             class="bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
             required
@@ -57,7 +65,7 @@ function FormChallenge() {
             type="url"
             id="urlRepo"
             name="urlRepository"
-            onChange={createChallenge}
+            onChange={addChallenge}
             value={challengeData.urlRepository || ""}
             class="bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
             required
