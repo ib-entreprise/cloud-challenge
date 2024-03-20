@@ -1,11 +1,7 @@
 import React, { useState } from "react"
 import { initializeApp } from "firebase/app"
 import { getAnalytics } from "firebase/analytics"
-import {
-  registerUserWithEmailAndPassword,
-  auth,
-  firebaseConfig,
-} from "./firebase"
+import { auth, firebaseConfig } from "./firebase"
 import {
   getAuth,
   onAuthStateChanged,
@@ -24,15 +20,11 @@ function FormRegister() {
       createUserWithEmailAndPassword(auth, email, password1)
         .then((userCredential) => {
           // Signed up
-          console.log(userCredential)
           const user = userCredential.user
-          // ...
         })
         .catch((error) => {
           const errorCode = error.code
           const errorMessage = error.message
-          console.log(error)
-          // ..
         })
     } else {
       alert("remplir corrrectement tous les champs...")

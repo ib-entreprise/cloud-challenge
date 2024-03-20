@@ -6,7 +6,7 @@ function Register() {
   return (
     <>
       <HeaderAuth />
-      <FormRegister></FormRegister>
+      <FormRegister />
     </>
   )
 }

@@ -12,7 +12,7 @@ function FormChallenge() {
   return (
     <section>
       <form
-        class="max-w-lg mx-auto"
+        class="max-w-lg mx-auto mt-10"
         method="post"
         onSubmit={async (e) => {
           e.preventDefault()
@@ -32,7 +32,7 @@ function FormChallenge() {
             name="titre"
             onChange={addChallenge}
             value={challengeData.titre || ""}
-            class="bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             placeholder="Titre du challenge"
             required
           />
@@ -50,7 +50,7 @@ function FormChallenge() {
             name="description"
             onChange={addChallenge}
             value={challengeData.description || ""}
-            class="bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             required
           />
         </div>
@@ -67,12 +67,17 @@ function FormChallenge() {
             name="urlRepository"
             onChange={addChallenge}
             value={challengeData.urlRepository || ""}
-            class="bg-gray-50 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             required
           />
         </div>
 
-        <button type="submit">Soumettre votre challenge</button>
+        <button
+          type="submit"
+          className="w-full text-black bg-blue-500 hover:bg-blue-700 hover:text-white focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+        >
+          Soumettre votre challenge
+        </button>
       </form>
     </section>
   )

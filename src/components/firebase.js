@@ -1,4 +1,5 @@
 // Import the functions you need from the SDKs you need
+// import React, { useState } from "react"
 import { initializeApp } from "firebase/app"
 import { getAnalytics } from "firebase/analytics"
 import { getAuth, onAuthStateChanged } from "firebase/auth"
@@ -19,11 +20,46 @@ const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
 const analytics = getAnalytics(app)
 
+// const [currentUser, setCurrentUser] = useState()
+// get current user UID
+// const getCurrentUser = () => {
+// onAuthStateChanged(auth, (user) => {
+//   if (user) {
+//     // currentUser = user.uid
+//   }
+// })
+// }
+
 //appel API pour le CRUD
 
 const urlGetPostChallenge = `https://firestore.googleapis.com/v1/projects/${firebaseConfig.projectId}/databases/(default)/documents/challenge?key=${firebaseConfig.apiKey}`
 
-export const createChallenge = async (challengeData) => {
+const getChallenges = async () => {
+  try {
+    let challengeData = []
+    const response = await axios.get(urlGetPostChallenge)
+    if (response.data.documents) {
+      for (let challenge of response.data.documents) {
+        const { titre, description, urlRepository, createurId } =
+          challenge.fields
+
+        challengeData.push({
+          id: challenge.name.split("/")[6],
+          titre: titre.stringValue,
+          description: description.stringValue,
+          urlRepository: urlRepository.stringValue,
+          createurId: createurId.stringValue,
+        })
+      }
+      return challengeData
+    }
+    return []
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const createChallenge = async (challengeData) => {
   try {
     let bodyPostChallenge = {
       fields: {
@@ -49,7 +85,7 @@ export const createChallenge = async (challengeData) => {
   }
 }
 
-// export { createChallenge }
+export { createChallenge, getChallenges }
 
 //--------------------------------
 
