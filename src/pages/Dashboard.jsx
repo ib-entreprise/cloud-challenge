@@ -1,6 +1,7 @@
 import React, { useDebugValue, useEffect } from "react"
 import Header from "../components/Header"
 import ChallengeCard from "../components/ChallengeCard"
+import ProgressionBar from "../components/ProgressionBar"
 import { getChallenges } from "../components/firebase"
 import { useSelector, useDispatch } from "react-redux"
 import { setChallenges } from "../store/challenge/challengeSlice"
@@ -21,11 +22,15 @@ function Dashboard() {
   return (
     <>
       <Header />
-      <div>Barre de progression des challenges réussis</div>
-      <main className="flex justify-center items-start gap-5 flex-wrap my-8">
-        {challenges.map((challenge) => {
-          return <ChallengeCard key={challenge.id} challenge={challenge} />
-        })}
+      <main className="w-auto">
+        <div className="w-1/2 mx-auto my-6">
+          <ProgressionBar />
+        </div>
+        <section className="flex justify-center items-start gap-5 flex-wrap my-8">
+          {challenges.map((challenge) => {
+            return <ChallengeCard key={challenge.id} challenge={challenge} />
+          })}
+        </section>
       </main>
     </>
   )
