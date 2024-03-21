@@ -1,8 +1,10 @@
 import React, { useState } from "react"
 import { createChallenge } from "./firebase"
 import { toast, ToastContainer } from "react-toastify"
+import { useNavigate } from "react-router-dom"
 
 function FormChallenge() {
+  const navigate = useNavigate()
   const [challengeData, setChallengeData] = useState({})
 
   const addChallenge = (e) => {
@@ -26,11 +28,13 @@ function FormChallenge() {
             return
           }
           if (!challengeData.urlRepository.match(/^https:\/\/github\.com/)) {
-            toast.error("L'url n'est pas une url d'un dépot github")
+            toast.error("L'url n'est pas une url d'un dépot github valide !")
             return
           }
 
           await createChallenge(challengeData)
+          setChallengeData({})
+          navigate("/dashboard")
         }}
       >
         <div className="mb-5">
