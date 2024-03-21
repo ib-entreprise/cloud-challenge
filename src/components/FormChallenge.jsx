@@ -1,25 +1,39 @@
 import React, { useState } from "react"
 import { createChallenge } from "./firebase"
+import { toast, ToastContainer } from "react-toastify"
 
 function FormChallenge() {
-  const [challengeData, useChallengeData] = useState({})
+  const [challengeData, setChallengeData] = useState({})
 
   const addChallenge = (e) => {
     const { name, value } = e.target
-    useChallengeData((prev) => ({ ...prev, [name]: value }))
+    setChallengeData((prev) => ({ ...prev, [name]: value }))
   }
 
   return (
     <section>
       <form
-        class="max-w-lg mx-auto mt-10"
+        className="max-w-lg mx-auto mt-10"
         method="post"
         onSubmit={async (e) => {
           e.preventDefault()
+          if (
+            !challengeData.titre ||
+            !challengeData.description ||
+            !challengeData.urlRepository
+          ) {
+            toast.error("Tous les champs doivent être complétés !")
+            return
+          }
+          if (!challengeData.urlRepository.match(/^https:\/\/github\.com/)) {
+            toast.error("L'url n'est pas une url d'un dépot github")
+            return
+          }
+
           await createChallenge(challengeData)
         }}
       >
-        <div class="mb-5">
+        <div className="mb-5">
           <label
             htmlFor="titre"
             className="block mb-2 text-sm font-medium text-gray-900"
@@ -32,15 +46,14 @@ function FormChallenge() {
             name="titre"
             onChange={addChallenge}
             value={challengeData.titre || ""}
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             placeholder="Titre du challenge"
-            required
           />
         </div>
-        <div class="mb-5">
+        <div className="mb-5">
           <label
-            for="description"
-            class="block mb-2 text-sm font-medium text-gray-900"
+            htmlFor="description"
+            className="block mb-2 text-sm font-medium text-gray-900"
           >
             Description
           </label>
@@ -50,25 +63,24 @@ function FormChallenge() {
             name="description"
             onChange={addChallenge}
             value={challengeData.description || ""}
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            required
+            className="h-40 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           />
         </div>
-        <div class="mb-5">
+        <div className="mb-5">
           <label
-            for="urlRepo"
-            class="block mb-2 text-sm font-medium text-gray-900"
+            htmlFor="urlRepo"
+            className="block mb-2 text-sm font-medium text-gray-900"
           >
             URL du repository
           </label>
           <input
-            type="url"
+            type="text"
             id="urlRepo"
             name="urlRepository"
+            placeholder="https://github.com/"
             onChange={addChallenge}
             value={challengeData.urlRepository || ""}
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            required
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
           />
         </div>
 
@@ -79,6 +91,7 @@ function FormChallenge() {
           Soumettre votre challenge
         </button>
       </form>
+      <ToastContainer theme="colored" />
     </section>
   )
 }
