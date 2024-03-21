@@ -91,7 +91,7 @@ function FormChallenge() {
           Soumettre votre challenge
         </button>
       </form>
-      <ToastContainer theme="colored" />
+      <ToastContainer theme="colored" position="bottom-right" />
     </section>
   )
 }
