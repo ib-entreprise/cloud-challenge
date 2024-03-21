@@ -3,9 +3,12 @@ import { useNavigate } from "react-router-dom"
 import { signInWithEmailAndPassword } from "firebase/auth"
 import { auth } from "./firebase"
 import { toast } from "react-toastify"
+import { useDispatch } from "react-redux"
+import { getUser } from "../store/user/userSlice"
 
 function FormLogin() {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -15,8 +18,8 @@ function FormLogin() {
     try {
       const user = await signInWithEmailAndPassword(auth, email, password)
       toast.success("Vous êtes connecté")
+      dispatch(getUser({ id: user._tokenResponse.localId, email }))
       navigate("/dashboard")
-      console.log(user)
     } catch (error) {
       toast.error("Email et/ou mot de passe incorrect !")
     }
