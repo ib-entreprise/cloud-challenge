@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard"
 import Challenges from "./pages/Challenges"
 import Profile from "./pages/Profile"
 import Challenge from "./pages/Challenge"
+import { ToastContainer } from "react-toastify"
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/profile" element={<Profile />}></Route>
         <Route path="/createChallenge" element={<Challenge />}></Route>
       </Routes>
+      <ToastContainer theme="colored" position="bottom-right" />
     </>
   )
 }

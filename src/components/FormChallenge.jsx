@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { createChallenge } from "./firebase"
-import { toast, ToastContainer } from "react-toastify"
+import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
 
 function FormChallenge() {
@@ -96,7 +96,6 @@ function FormChallenge() {
           Soumettre votre challenge
         </button>
       </form>
-      <ToastContainer theme="colored" position="bottom-right" />
     </section>
   )
 }
