@@ -33,6 +33,7 @@ function FormChallenge() {
           }
 
           await createChallenge(challengeData)
+          toast.success("Votre challenge a bien été crée avec succès !")
           setChallengeData({})
           navigate("/dashboard")
         }}
