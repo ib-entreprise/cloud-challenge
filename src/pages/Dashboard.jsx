@@ -5,9 +5,11 @@ import ProgressionBar from "../components/ProgressionBar"
 import { getChallenges } from "../components/firebase"
 import { useSelector, useDispatch } from "react-redux"
 import { setChallenges } from "../store/challenge/challengeSlice"
+import FormSolution from "../components/FormSolution"
 
 function Dashboard() {
   const { challenges } = useSelector((state) => state.challenge)
+  const { displayFormSoluce } = useSelector((state) => state.solution)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -22,6 +24,7 @@ function Dashboard() {
   return (
     <>
       <Header />
+
       <main className="w-auto">
         <div className="w-1/2 mx-auto my-6">
           <ProgressionBar />
@@ -32,6 +35,7 @@ function Dashboard() {
           })}
         </section>
       </main>
+      {displayFormSoluce && <FormSolution />}
     </>
   )
 }
