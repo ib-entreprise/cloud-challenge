@@ -6,6 +6,7 @@ import { useSelector } from "react-redux"
 
 function Challenges() {
   const { challenges } = useSelector((state) => state.challenge)
+  const { user } = useSelector((state) => state.user)
   const [choice, setChoice] = useState("allChallenges")
   return (
     <>
@@ -17,7 +18,7 @@ function Challenges() {
       <section className="flex px-3 justify-center items-start gap-5 flex-wrap my-8">
         {choice === "myChallenges"
           ? challenges
-              .filter((challenge) => challenge.createurId === "1234")
+              .filter((challenge) => challenge.createurId === user.id)
               .map((challenge) => (
                 <ChallengeCard key={challenge.id} challenge={challenge} />
               ))
