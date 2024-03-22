@@ -59,18 +59,21 @@ function FormSolution() {
               className="p-4 md:p-5"
               onSubmit={async (e) => {
                 e.preventDefault()
+                if (!urlRepo.match(/^(https:\/\/github\.com)/)) {
+                  toast.error("Veuillez saisir une Url Github valide !")
+                  return
+                }
                 try {
                   const data = await createSoluce({
                     challengeId: challenge.id,
                     lienSolution: urlRepo,
                     userId: user.id,
                   })
-                  console.log(data)
                   dispatch(getChallenge({}))
                   dispatch(setDisplayFormSoluce(false))
                   toast.success("votre solution a bien été envoyé !")
                 } catch (error) {
-                  toast.error("Une erreur s'est produite, vueillez réessayer")
+                  toast.error("Une erreur s'est produite, veuillez réessayer")
                 }
               }}
             >
