@@ -34,6 +34,8 @@ const analytics = getAnalytics(app)
 
 const urlGetPostChallenge = `https://firestore.googleapis.com/v1/projects/${firebaseConfig.projectId}/databases/(default)/documents/challenge?key=${firebaseConfig.apiKey}`
 
+const urlGetPostSolution = `https://firestore.googleapis.com/v1/projects/${firebaseConfig.projectId}/databases/(default)/documents/solution?key=${firebaseConfig.apiKey}`
+
 const getChallenges = async () => {
   try {
     let challengeData = []
@@ -85,7 +87,36 @@ const createChallenge = async (challengeData) => {
   }
 }
 
-export { createChallenge, getChallenges }
+const createSoluce = async (soluceData) => {
+  try {
+    let bodyPostChallenge = {
+      fields: {
+        challengeId: {
+          stringValue: soluce.challengeId,
+        },
+        isValidate: {
+          stringValue: "false",
+        },
+        dateProposition: {
+          stringValue: new Intl.DateTimeFormat("fr").format(Date.now()),
+        },
+        lienSolution: {
+          stringValue: soluceData.lienSolution,
+        },
+        userId: {
+          stringValue: soluceData.userId,
+        },
+      },
+    }
+    const response = await axios.post(urlGetPostSolution, bodyPostChallenge)
+
+    return response.data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export { createChallenge, getChallenges, createSoluce }
 
 //--------------------------------
 
