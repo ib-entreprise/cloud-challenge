@@ -61,7 +61,7 @@ const getChallenges = async () => {
   }
 }
 
-const createChallenge = async (challengeData) => {
+const createChallenge = async (challengeData, userId) => {
   try {
     let bodyPostChallenge = {
       fields: {
@@ -75,7 +75,7 @@ const createChallenge = async (challengeData) => {
           stringValue: challengeData.urlRepository,
         },
         createurId: {
-          stringValue: "e3p3dvwEYOWWiSjW8zbzjwwpg0S2",
+          stringValue: userId,
         },
       },
     }

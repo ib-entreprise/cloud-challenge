@@ -2,9 +2,11 @@ import React, { useState } from "react"
 import { createChallenge } from "./firebase"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
+import { useSelector } from "react-redux"
 
 function FormChallenge() {
   const navigate = useNavigate()
+  const { user } = useSelector((state) => state.user)
   const [challengeData, setChallengeData] = useState({})
 
   const addChallenge = (e) => {
@@ -32,7 +34,7 @@ function FormChallenge() {
             return
           }
 
-          await createChallenge(challengeData)
+          await createChallenge(challengeData, user.id)
           toast.success("Votre challenge a bien été crée avec succès !")
           setChallengeData({})
           navigate("/dashboard")
