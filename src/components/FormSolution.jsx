@@ -71,7 +71,7 @@ function FormSolution() {
                   })
                   dispatch(getChallenge({}))
                   dispatch(setDisplayFormSoluce(false))
-                  toast.success("votre solution a bien été envoyé !")
+                  toast.success("Votre solution a bien été envoyée !")
                 } catch (error) {
                   toast.error("Une erreur s'est produite, veuillez réessayer")
                 }
