@@ -92,7 +92,7 @@ const createSoluce = async (soluceData) => {
     let bodyPostChallenge = {
       fields: {
         challengeId: {
-          stringValue: soluce.challengeId,
+          stringValue: soluceData.challengeId,
         },
         isValidate: {
           stringValue: "false",

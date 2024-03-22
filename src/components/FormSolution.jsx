@@ -1,10 +1,14 @@
 import React, { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { setDisplayFormSoluce } from "../store/solution/solutionSlice"
 import { getChallenge } from "../store/challenge/challengeSlice"
+import { createSoluce } from "./firebase"
+import { toast } from "react-toastify"
 
 function FormSolution() {
   const dispatch = useDispatch()
+  const { user } = useSelector((state) => state.user)
+  const { challenge } = useSelector((state) => state.challenge)
 
   const [urlRepo, setUrlRepo] = useState("")
   return (
@@ -50,7 +54,26 @@ function FormSolution() {
                 <span className="sr-only">Close modal</span>
               </button>
             </div>
-            <form className="p-4 md:p-5">
+            <form
+              method="post"
+              className="p-4 md:p-5"
+              onSubmit={async (e) => {
+                e.preventDefault()
+                try {
+                  const data = await createSoluce({
+                    challengeId: challenge.id,
+                    lienSolution: urlRepo,
+                    userId: user.id,
+                  })
+                  console.log(data)
+                  dispatch(getChallenge({}))
+                  dispatch(setDisplayFormSoluce(false))
+                  toast.success("votre solution a bien été envoyé !")
+                } catch (error) {
+                  toast.error("Une erreur s'est produite, vueillez réessayer")
+                }
+              }}
+            >
               <div className="grid gap-4 mb-4 grid-cols-2">
                 <div className="col-span-2">
                   <label
