@@ -1,12 +1,6 @@
 import React, { useState } from "react"
-import { initializeApp } from "firebase/app"
-import { getAnalytics } from "firebase/analytics"
-import { auth, firebaseConfig } from "./firebase"
-import {
-  getAuth,
-  onAuthStateChanged,
-  createUserWithEmailAndPassword,
-} from "firebase/auth"
+import { auth } from "./firebase"
+import { createUserWithEmailAndPassword } from "firebase/auth"
 
 function FormRegister() {
   const [email, setEmail] = useState("")
@@ -43,16 +37,16 @@ function FormRegister() {
   return (
     <section>
       <form
-        className="max-w-sm mx-auto"
+        className="max-w-md mx-auto"
         method="post"
         onSubmit={handleRegister}
       >
-        <div className="mb-5">
+        <div className="my-5">
           <label
             htmlFor="email"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
           >
-            Your email
+            Votre email
           </label>
           <input
             type="email"
@@ -66,9 +60,9 @@ function FormRegister() {
         <div className="mb-5">
           <label
             htmlFor="password"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
           >
-            Your password
+            Votre mot de passe
           </label>
           <input
             type="password"
@@ -81,9 +75,9 @@ function FormRegister() {
         <div className="mb-5">
           <label
             htmlFor="repeat-password"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-black"
           >
-            Repeat password
+            Répeter le mot de passe
           </label>
           <input
             type="password"
@@ -118,9 +112,9 @@ function FormRegister() {
         </div>
         <button
           type="submit"
-          className="text-red-500 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          className="text-green-500 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:hover:bg-green-700 dark:focus:ring-green-800 dark:hover:white hover:text-white"
         >
-          Register new account
+          Créer votre nouveau compte
         </button>
       </form>
     </section>

@@ -26,7 +26,7 @@ function Dashboard() {
         <div className="w-1/2 mx-auto my-6">
           <ProgressionBar />
         </div>
-        <section className="flex justify-center items-start gap-5 flex-wrap my-8">
+        <section className="flex px-3 justify-center items-start gap-5 flex-wrap my-8">
           {challenges.map((challenge) => {
             return <ChallengeCard key={challenge.id} challenge={challenge} />
           })}
